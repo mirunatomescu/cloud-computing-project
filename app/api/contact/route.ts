@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from "next-auth/next" 'next-auth'
 import { authOptions } from '@/lib/auth'
 import nodemailer from 'nodemailer'
-
+export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)

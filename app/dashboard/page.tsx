@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth'
+import { getServerSession } from "next-auth/next" 'next-auth'
 import { authOptions } from '@/lib/auth'
 import connectDB from '@/lib/mongodb'
 import User from '@/models/User'
