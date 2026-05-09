@@ -28,7 +28,7 @@
 - **Serviciu email** prin Gmail SMTP (Nodemailer)
 - **Bază de date cloud** MongoDB Atlas pentru persistența datelor
 
-Aplicația este publicată pe **Vercel** și poate fi accesată la: `https://simpre-2026.vercel.app`
+Aplicația este publicată pe **Vercel** și poate fi accesată la: 
 
 ---
 
@@ -48,7 +48,7 @@ Aplicația este publicată pe **Vercel** și poate fi accesată la: `https://sim
 | **NextAuth.js** | 4.x | Autentificare JWT + sesiuni persistente |
 | **bcryptjs** | 2.4 | Hash parole |
 
-### Servicii Cloud (minim 2 - cerință îndeplinită)
+### Servicii Cloud
 
 #### ☁️ Serviciu Cloud #1 - Email SMTP (Nodemailer + Gmail)
 - **Provider**: Google Gmail cu App Passwords
@@ -118,9 +118,9 @@ Browser (Client)
 | Autentificare + persistență refresh | ✅ | NextAuth JWT cu maxAge 30 zile |
 | Cod sursă pe GitHub | ✅ | Repository public |
 | Introducere & tehnologii | ✅ | Acest README |
-| Video workflow YouTube | ✅ | Link: [adaugă link] |
-| Capturi ecran aplicație | ✅ | Folder `/docs/screenshots/` |
-| Publicare Vercel | ✅ | Link: [adaugă link] |
+| Video workflow YouTube | ✅ | Link:  |
+| Capturi ecran aplicație | ✅ | Folder `printscreens` |
+| Publicare Vercel | ✅ | Link:  |
 
 ---
 
@@ -144,12 +144,6 @@ npm install
 ---
 
 ## Configurare variabile de mediu
-
-Copiază `.env.example` în `.env.local`:
-
-```bash
-cp .env.example .env.local
-```
 
 Completează `.env.local`:
 
@@ -206,13 +200,11 @@ Aplicația rulează pe [http://localhost:3000](http://localhost:3000).
 4. Autentifică-te (`/login`)
 5. Testează AI Chat (`/dashboard/chat`)
 6. Trimite un email de test (`/dashboard/email`)
-7. Dă refresh - sesiunea persistă ✅
+7. Dă refresh - sesiunea persistă
 
 ---
 
 ## Deploy pe Vercel
-
-### Opțiunea 1 - Prin interfața web (recomandat)
 
 1. Push cod pe GitHub:
 ```bash
@@ -227,16 +219,6 @@ git push -u origin main
 3. Importă repository-ul de pe GitHub
 4. Adaugă variabilele de mediu din `.env.local` în Vercel Dashboard
 5. Deploy!
-
-### Opțiunea 2 - CLI
-
-```bash
-npm install -g vercel
-vercel login
-vercel --prod
-```
-
-**Important:** Schimbă `NEXTAUTH_URL` în Vercel la URL-ul de producție!
 
 ---
 
@@ -308,8 +290,7 @@ simpre-2026/
 
 ## 🎥 Video Demo
 
-> YouTube link (Nelistat): [adaugă link după înregistrare]
+> YouTube link (Nelistat): 
 
 ---
 
-*Web AI Assistant with Email Integration · Cloud Computing Project · Universitatea Politehnica București*
