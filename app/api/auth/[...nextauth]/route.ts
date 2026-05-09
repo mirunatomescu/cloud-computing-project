@@ -1,8 +1,22 @@
+export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-import NextAuth from "next-auth"
-import { authOptions } from "@/lib/auth"
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import connectDB from '@/lib/mongodb'
+import User from '@/models/User'
 
-const handler = NextAuth(authOptions)
+export async function GET() {
+  const session = await getServerSession(authOptions)
 
-export { handler as GET, handler as POST }
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Neautentificat' }, { status: 401 })
+  }
+
+  await connectDB()
+
+  const user = await User.findById(session.user.id)
+
+  return NextResponse.json(user)
+}
