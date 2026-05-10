@@ -386,7 +386,7 @@ Browser (Client)
 ### Clonare repository
 
 ```bash
-git clone https://github.com/[username]/simpre-2026.git
+git clone https://github.com/mirunatomescu/simpre-2026.git
 cd simpre-2026
 npm install --legacy-peer-deps
 ```
@@ -461,7 +461,7 @@ Aplicația rulează pe [http://localhost:3000](http://localhost:3000).
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/[username]/simpre-2026.git
+git remote add origin https://github.com/mirunatomescu/simpre-2026.git
 git push -u origin main
 ```
 
@@ -469,9 +469,6 @@ git push -u origin main
 3. Importă repository-ul de pe GitHub
 4. Adaugă variabilele de mediu din `.env.local` în **Vercel Dashboard → Settings → Environment Variables**
 5. Deploy!
-
-> ⚠️ Asigură-te că `NEXTAUTH_URL` este setat la URL-ul real al deployment-ului tău pe Vercel (ex: `https://proiectul-tau.vercel.app`), nu la `localhost`.
-
 ---
 
 ## 13. Structura proiectului
