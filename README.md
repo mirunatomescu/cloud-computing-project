@@ -5,7 +5,9 @@
 
 ---
 🌐 **Link repository GitHub:** https://github.com/mirunatomescu/cloud-computing-project
-🎥 **Video prezentare YouTube:** https://youtu.be/ux1axXt8jtU?si=gC6EFarSGsR_6W-C  
+
+🎥 **Video prezentare YouTube:** https://youtu.be/ux1axXt8jtU?si=gC6EFarSGsR_6W-C 
+
 🌐 **Link publicare Vercel:** https://cloud-computing-project-seven.vercel.app/
 
 ---
