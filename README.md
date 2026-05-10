@@ -32,11 +32,11 @@
 
 **Web AI Assistant with Email Integration** este o aplicație web full-stack creată pentru materia Cloud Computing, care demonstrează integrarea a **trei servicii cloud**:
 
-- ☁️ **Serviciu Cloud #1 — OpenAI GPT-3.5** (REST API) — asistent AI conversațional cu memorie persistentă, accesat prin API REST oficial
-- ☁️ **Serviciu Cloud #2 — Gmail SMTP prin Nodemailer** (serviciu email cloud) — notificări automate la înregistrare și la trimiterea mesajelor
-- ☁️ **Serviciu Cloud #3 — MongoDB Atlas** (Database-as-a-Service) — stocare persistentă pentru utilizatori, sesiuni și istoricul conversațiilor AI
+- ☁️ **Serviciu Cloud #1 - OpenAI GPT-3.5** (REST API) - asistent AI conversațional cu memorie persistentă, accesat prin API REST oficial
+- ☁️ **Serviciu Cloud #2 - Gmail SMTP prin Nodemailer** (serviciu email cloud) - notificări automate la înregistrare și la trimiterea mesajelor
+- ☁️ **Serviciu Cloud #3 - MongoDB Atlas** (Database-as-a-Service) - stocare persistentă pentru utilizatori, sesiuni și istoricul conversațiilor AI
 
-Utilizatorul se poate înregistra, autentifica și accesa un dashboard personal de unde poate conversa cu asistentul AI și trimite email-uri de confirmare. Autentificarea este persistentă prin JWT — utilizatorul rămâne logat chiar și după refresh sau închiderea browser-ului. Aplicația este publicată pe **Vercel**.
+Utilizatorul se poate înregistra, autentifica și accesa un dashboard personal de unde poate conversa cu asistentul AI și trimite email-uri de confirmare. Autentificarea este persistentă prin JWT - utilizatorul rămâne logat chiar și după refresh sau închiderea browser-ului. Aplicația este publicată pe **Vercel**.
 
 ---
 
@@ -44,11 +44,11 @@ Utilizatorul se poate înregistra, autentifica și accesa un dashboard personal 
 
 Aplicația rezolvă nevoia de a integra într-un singur loc mai multe servicii cloud distincte, conectate printr-un API REST intern:
 
-1. **Comunicare AI** — utilizatorul poate pune întrebări unui asistent bazat pe GPT-3.5, care răspunde în timp real. Fiecare conversație este salvată automat în MongoDB Atlas, astfel că istoricul este disponibil la orice reconectare.
+1. **Comunicare AI** - utilizatorul poate pune întrebări unui asistent bazat pe GPT-3.5, care răspunde în timp real. Fiecare conversație este salvată automat în MongoDB Atlas, astfel că istoricul este disponibil la orice reconectare.
 
-2. **Notificări prin email** — la înregistrare, utilizatorul primește automat un email de bun venit prin Gmail SMTP. De asemenea, poate trimite manual email-uri de test prin interfața platformei, primind imediat o confirmare în căsuța proprie.
+2. **Notificări prin email** - la înregistrare, utilizatorul primește automat un email de bun venit prin Gmail SMTP. De asemenea, poate trimite manual email-uri de test prin interfața platformei, primind imediat o confirmare în căsuța proprie.
 
-3. **Persistența datelor în cloud** — toți utilizatorii, parolele (stocate hash-uite cu bcrypt), sesiunile și istoricul conversațiilor sunt stocate în MongoDB Atlas (Free Tier M0), un serviciu cloud de tip Database-as-a-Service, accesibil din orice regiune.
+3. **Persistența datelor în cloud** - toți utilizatorii, parolele (stocate hash-uite cu bcrypt), sesiunile și istoricul conversațiilor sunt stocate în MongoDB Atlas (Free Tier M0), un serviciu cloud de tip Database-as-a-Service, accesibil din orice regiune.
 
 Problema centrală este **autentificarea persistentă la refresh**: utilizatorul rămâne logat datorită sesiunilor JWT gestionate de NextAuth.js cu o durată de 30 de zile, fără a fi necesară re-autentificarea.
 
@@ -78,23 +78,23 @@ Parolele sunt stocate hash-uite cu **bcryptjs** (salt rounds: 12). Nicio parolă
 
 ### Autentificare la serviciile cloud externe
 
-**☁️ Serviciu Cloud #1 — OpenAI GPT-3.5 (REST API)**
+**☁️ Serviciu Cloud #1 - OpenAI GPT-3.5 (REST API)**
 - Comunicare prin **HTTP REST** la `https://api.openai.com/v1/chat/completions`
 - Autentificare prin header: `Authorization: Bearer <OPENAI_API_KEY>`
 - Gestionat prin SDK-ul oficial `openai` (wrapper peste REST API)
 - Model utilizat: `gpt-3.5-turbo`, `max_tokens: 1000`, `temperature: 0.7`
 
-**☁️ Serviciu Cloud #2 — Gmail SMTP (Nodemailer)**
+**☁️ Serviciu Cloud #2 - Gmail SMTP (Nodemailer)**
 - Comunicare prin protocolul **SMTP** cu serverele Google (`smtp.gmail.com:587`)
 - Autentificare prin **Gmail App Password** (generat separat, nu parola contului Google)
 - Gestionat prin librăria `nodemailer` cu `service: 'gmail'`
 - Utilizat în două locuri: email de bun venit la înregistrare și email de confirmare din dashboard
 
-**☁️ Serviciu Cloud #3 — MongoDB Atlas (Database-as-a-Service)**
+**☁️ Serviciu Cloud #3 - MongoDB Atlas (Database-as-a-Service)**
 - Comunicare prin **protocolul MongoDB** (TCP/IP) via driverul `mongoose`
 - Autentificare prin connection string: `mongodb+srv://<user>:<password>@cluster0.xxxxx.mongodb.net/`
 - Conexiunea este cached la nivel de modul Node.js pentru a evita reconectările inutile în mediul serverless Vercel
-- Colecție utilizată: `users` — stochează profilul, parola hash-uită și array-ul `chatHistory`
+- Colecție utilizată: `users` - stochează profilul, parola hash-uită și array-ul `chatHistory`
 
 ---
 
@@ -129,7 +129,7 @@ Utilizator (Browser)
         │     └──────────────────────────────────────────► Gmail SMTP (Cloud #2)
         │                                                   Trimite email confirmare
         ▼
-   Vercel (Next.js 14 — App Router)
+   Vercel (Next.js 14 - App Router)
         │
         ├── ☁️ OpenAI GPT-3.5  ── REST API (HTTPS)
         ├── ☁️ Gmail SMTP       ── Protocol SMTP
@@ -138,7 +138,7 @@ Utilizator (Browser)
 
 ### Exemple de request / response
 
-**POST `/api/chat`** — trimite mesaj la OpenAI GPT-3.5
+**POST `/api/chat`** - trimite mesaj la OpenAI GPT-3.5
 
 Request:
 ```json
@@ -158,7 +158,7 @@ Response:
 
 ---
 
-**POST `/api/auth/register`** — înregistrare utilizator nou
+**POST `/api/auth/register`** - înregistrare utilizator nou
 
 Request:
 ```json
@@ -176,7 +176,7 @@ Response (succes):
 }
 ```
 
-Response (eroare — email deja folosit):
+Response (eroare - email deja folosit):
 ```json
 {
   "error": "Există deja un cont cu acest email"
@@ -185,7 +185,7 @@ Response (eroare — email deja folosit):
 
 ---
 
-**POST `/api/contact`** — trimitere email de confirmare
+**POST `/api/contact`** - trimitere email de confirmare
 
 Request:
 ```json
@@ -204,14 +204,14 @@ Response:
 
 ### Metode HTTP utilizate
 
-- **GET** — preluare date (istoric chat din MongoDB, profil utilizator, sesiune curentă)
-- **POST** — creare date noi (mesaj chat trimis la OpenAI, înregistrare utilizator, trimitere email SMTP)
+- **GET** - preluare date (istoric chat din MongoDB, profil utilizator, sesiune curentă)
+- **POST** - creare date noi (mesaj chat trimis la OpenAI, înregistrare utilizator, trimitere email SMTP)
 
 ---
 
 ## 5. Capturi ecran aplicație
 
-### Landing Page — `app/page.tsx`
+### Landing Page - `app/page.tsx`
 
 Pagina principală a platformei, cu descrierea celor trei servicii cloud integrate și butoane de navigare spre înregistrare și autentificare.
 
@@ -219,7 +219,7 @@ Pagina principală a platformei, cu descrierea celor trei servicii cloud integra
 
 ---
 
-### Pagina de înregistrare — `app/register/page.tsx`
+### Pagina de înregistrare - `app/register/page.tsx`
 
 Formularul de creare cont nou. La submit, parola este hash-uită cu bcrypt, contul este salvat în MongoDB Atlas (Cloud #3), și se trimite automat un email de bun venit prin Gmail SMTP (Cloud #2).
 
@@ -227,7 +227,7 @@ Formularul de creare cont nou. La submit, parola este hash-uită cu bcrypt, cont
 
 ---
 
-### Email de bun venit — Cloud #2 (Gmail SMTP) — `app/api/auth/register/route.ts`
+### Email de bun venit - Cloud #2 (Gmail SMTP) - `app/api/auth/register/route.ts`
 
 Email-ul primit automat în căsuța Gmail imediat după crearea contului, generat cu un template HTML și trimis prin Nodemailer conectat la Gmail SMTP.
 
@@ -235,7 +235,7 @@ Email-ul primit automat în căsuța Gmail imediat după crearea contului, gener
 
 ---
 
-### Dashboard Overview — `app/dashboard/page.tsx`
+### Dashboard Overview - `app/dashboard/page.tsx`
 
 Pagina principală a dashboard-ului, accesibilă doar utilizatorilor autentificați. Afișează numărul de mesaje AI salvate în MongoDB Atlas, data creării contului și acțiuni rapide spre cele două servicii cloud.
 
@@ -243,15 +243,15 @@ Pagina principală a dashboard-ului, accesibilă doar utilizatorilor autentifica
 
 ---
 
-### AI Chat — pagina inițială — `app/dashboard/chat/page.tsx`
+### AI Chat - pagina inițială - `app/dashboard/chat/page.tsx`
 
-Interfața de chat cu asistentul GPT-3.5 (Cloud #1 — OpenAI), înainte de a fi trimis primul mesaj. Include sugestii de întrebări predefinite.
+Interfața de chat cu asistentul GPT-3.5 (Cloud #1 - OpenAI), înainte de a fi trimis primul mesaj. Include sugestii de întrebări predefinite.
 
 ![AI Chat gol](./printscreens/Imagine5.png)
 
 ---
 
-### AI Chat — conversație activă — Cloud #1 (OpenAI GPT-3.5) — `app/dashboard/chat/page.tsx`
+### AI Chat - conversație activă - Cloud #1 (OpenAI GPT-3.5) - `app/dashboard/chat/page.tsx`
 
 Răspuns generat de OpenAI GPT-3.5 la întrebarea „Explică-mi ce este cloud computing". Mesajul și răspunsul sunt salvate imediat în MongoDB Atlas (Cloud #3).
 
@@ -259,7 +259,7 @@ Răspuns generat de OpenAI GPT-3.5 la întrebarea „Explică-mi ce este cloud c
 
 ---
 
-### MongoDB Atlas Data Explorer — Cloud #3 (Database-as-a-Service)
+### MongoDB Atlas Data Explorer - Cloud #3 (Database-as-a-Service)
 
 Vizualizarea documentelor din colecția `users` în consola MongoDB Atlas. Se poate observa structura documentului: câmpurile utilizatorului, parola hash-uită cu bcrypt și array-ul `chatHistory` cu mesajele din conversațiile AI salvate automat.
 
@@ -267,7 +267,7 @@ Vizualizarea documentelor din colecția `users` în consola MongoDB Atlas. Se po
 
 ---
 
-### Pagina Email — `app/dashboard/email/page.tsx`
+### Pagina Email - `app/dashboard/email/page.tsx`
 
 Formularul de trimitere email manual prin Cloud #2 (Gmail SMTP). Utilizatorul introduce un subiect și un mesaj; emailul este trimis la adresa asociată contului prin Nodemailer.
 
@@ -275,7 +275,7 @@ Formularul de trimitere email manual prin Cloud #2 (Gmail SMTP). Utilizatorul in
 
 ---
 
-### Email de confirmare primit — Cloud #2 (Gmail SMTP) — `app/api/contact/route.ts`
+### Email de confirmare primit - Cloud #2 (Gmail SMTP) - `app/api/contact/route.ts`
 
 Email-ul de confirmare primit în Gmail după trimiterea unui mesaj din dashboard, generat cu template HTML personalizat și livrat prin Gmail SMTP.
 
@@ -285,14 +285,14 @@ Email-ul de confirmare primit în Gmail după trimiterea unui mesaj din dashboar
 
 ## 6. Referințe
 
-- [Next.js Documentation](https://nextjs.org/docs) — framework-ul aplicației (App Router, API Routes)
-- [NextAuth.js Documentation](https://next-auth.js.org/) — autentificare JWT persistentă
-- [OpenAI API Reference](https://platform.openai.com/docs/api-reference) — GPT-3.5-turbo REST API
-- [Nodemailer Documentation](https://nodemailer.com/about/) — serviciu SMTP pentru email
-- [MongoDB Atlas](https://www.mongodb.com/atlas) — baza de date cloud (Database-as-a-Service)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) — ODM pentru MongoDB
-- [Vercel Platform](https://vercel.com/docs) — hosting și deployment serverless
-- [bcryptjs](https://www.npmjs.com/package/bcryptjs) — hash parole
+- [Next.js Documentation](https://nextjs.org/docs) - framework-ul aplicației (App Router, API Routes)
+- [NextAuth.js Documentation](https://next-auth.js.org/) - autentificare JWT persistentă
+- [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - GPT-3.5-turbo REST API
+- [Nodemailer Documentation](https://nodemailer.com/about/) - serviciu SMTP pentru email
+- [MongoDB Atlas](https://www.mongodb.com/atlas) - baza de date cloud (Database-as-a-Service)
+- [Mongoose Documentation](https://mongoosejs.com/docs/) - ODM pentru MongoDB
+- [Vercel Platform](https://vercel.com/docs) - hosting și deployment serverless
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs) - hash parole
 
 ---
 
@@ -314,18 +314,18 @@ Email-ul de confirmare primit în Gmail după trimiterea unui mesaj din dashboar
 
 ### Servicii Cloud
 
-#### ☁️ Serviciu Cloud #1 — OpenAI GPT-3.5 (REST API)
+#### ☁️ Serviciu Cloud #1 - OpenAI GPT-3.5 (REST API)
 - **Provider**: OpenAI Platform
 - **Library**: `openai` (SDK oficial)
 - **Model**: `gpt-3.5-turbo`
 - **Utilizare**: Asistent AI conversațional cu memorie
 
-#### ☁️ Serviciu Cloud #2 — Email SMTP (Nodemailer + Gmail)
+#### ☁️ Serviciu Cloud #2 - Email SMTP (Nodemailer + Gmail)
 - **Provider**: Google Gmail cu App Passwords
 - **Library**: `nodemailer`
 - **Utilizare**: Email de bun venit la înregistrare + confirmare mesaje
 
-#### ☁️ Serviciu Cloud #3 — MongoDB Atlas (Database-as-a-Service)
+#### ☁️ Serviciu Cloud #3 - MongoDB Atlas (Database-as-a-Service)
 - **Provider**: MongoDB Atlas (Free Tier M0)
 - **Library**: `mongoose`
 - **Utilizare**: Utilizatori, sesiuni, istoric conversații
@@ -450,7 +450,7 @@ Aplicația rulează pe [http://localhost:3000](http://localhost:3000).
 4. Autentifică-te (`/login`)
 5. Testează AI Chat (`/dashboard/chat`)
 6. Trimite un email de test (`/dashboard/email`)
-7. Dă refresh — sesiunea persistă
+7. Dă refresh - sesiunea persistă
 
 ---
 
